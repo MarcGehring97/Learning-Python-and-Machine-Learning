@@ -243,7 +243,7 @@ R = Stock()
 B = Stock()
 stocks = [G, Q, R, B]
 portfolio = Portfolio(stocks)
-'''
+
 #Input after each update
 print("\nPlease provide information in the following order: G, Q, R, B")
 lastinput = ""
@@ -251,7 +251,7 @@ laststock = ""
 while True:    
     inp1 = ""
     while inp1 != "priv" and inp1 != "eps":
-        inp1 = input("Do you want to add private or EPS information? priv/eps ")
+        inp1 = raw_input("\nDo you want to add private or EPS information? priv/eps ")
           
     if inp1 == "priv":
         
@@ -262,7 +262,7 @@ while True:
                 if counter ==0:
                     comp = ""
                     while comp != "g" and comp != "q" and comp != "r" and comp != "b":
-                        comp = input("What is the letter of the company? g/q/r/b ")
+                        comp = raw_input("\nWhat is the letter of the company? g/q/r/b ")
                     if comp == "g":
                         i = 0
                     elif comp == "q":
@@ -273,7 +273,7 @@ while True:
                         i = 3   
                 if stocks[i].get_intval()[1] == 10:
                     break
-                inp = (input("What are the new private information? ").split(", "))
+                inp = (raw_input("\nWhat are the new private information? ").split(", "))
                 #Expected input: 12, 23, 13
                 inp = [ int(x) for x in inp ]
                 #Converting entries into integers
@@ -292,7 +292,7 @@ while True:
                 inp = ""
                 print("\n" + str(stocks[i].get_intval()[1]) + " certain cards!")
                 while inp != "y" and inp != "n":
-                    inp = input("Would you like to add private information? y/n ")
+                    inp = raw_input("\nWould you like to add private information? y/n ")
                 if inp == "n":
                     break
                 
@@ -312,7 +312,7 @@ while True:
             try:
                 comp = ""
                 while comp != "g" and comp != "q" and comp != "r" and comp != "b":
-                    comp = str(input("What is the letter of the company? g/q/r/b "))
+                    comp = str(raw_input("\nWhat is the letter of the company? g/q/r/b "))
                 if comp == "g":
                     i = 0
                 elif comp == "q":
@@ -321,7 +321,7 @@ while True:
                     i = 2
                 elif comp == "b":
                     i = 3
-                inp = int(input("What is the new EPS information? "))
+                inp = int(raw_input("\nWhat is the new EPS information? "))
                 if inp not in posepsvals:
                     raise ValueError
                 #Expected input: 12
@@ -342,16 +342,17 @@ while True:
     print("Q: " + str(portfolio.get_intvals()[1]) + ", " + str(portfolio.get_certainty()[1]) + ", " + str(portfolio.get_numprivinfos()[1]) + ", " + str(portfolio.get_epsestimates()[1]))
     print("R: " + str(portfolio.get_intvals()[2]) + ", " + str(portfolio.get_certainty()[2]) + ", " + str(portfolio.get_numprivinfos()[2]) + ", " + str(portfolio.get_epsestimates()[2]))
     print("B: " + str(portfolio.get_intvals()[3]) + ", " + str(portfolio.get_certainty()[3]) + ", " + str(portfolio.get_numprivinfos()[3]) + ", " + str(portfolio.get_epsestimates()[3]))
-    print(" ")
+    print("")
     print("For 75% accuracy, buy 19 peeks")
     print("For 80% accuracy, buy 23 peeks")
     print("For 85% accuracy, buy 27 peeks")
     print("For 90% accuracy, buy 34 peeks (recommended)")
     print("For 95% accuracy, buy 48 peeks")
+    print("")
     
     inp = ""
     while inp != "y" and inp != "n":
-        inp = input("Would you like to remove your last input? y/n ")
+        inp = raw_input("Would you like to remove your last input? y/n ")
     if  inp == "y":
         if lastinput == "priv" and permissioncheck == 0:
             laststock.del_lastprivinfo()
@@ -365,7 +366,7 @@ while True:
        
     inp = ""
     while inp != "y" and inp != "n":
-        inp = input("Would you like to erase all your peek information? y/n ")
+        inp = raw_input("\nWould you like to erase all your peek information? y/n ")
     if  inp == "y":
         laststock.del_allprivinfo()
         permissioncheck = 0
@@ -376,10 +377,11 @@ while True:
         
     inp = ""
     while inp != "y" and inp != "n":
-        inp = input("Would you like to continue? y/n ")
+        inp = raw_input("\nWould you like to continue? y/n ")
     if  inp == "n":
         break
-'''
+    print("")
+
 #Compare theoretical return (purchase price / intrinsic value - 1) 
 #with borrowing rate of 10% to decide whether to buy on margin
 #Understand how borrowing works
@@ -466,7 +468,7 @@ def randomdrawer(numpeeks):
         output.append(y)
     return output, sum(x)
 
-x, y = randomdrawer(15)
-print(x, y)
-x = intval(x, 0)[0]
-print(x)
+#x, y = randomdrawer(15)
+#print(x, y)
+#x = intval(x, 0)[0]
+#print(x)
