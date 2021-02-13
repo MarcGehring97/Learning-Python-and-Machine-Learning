@@ -466,7 +466,6 @@ def randomdrawer(numpeeks):
         output.append(y)
     return output, sum(x)
 
-
 x, y = randomdrawer(15)
 print(x, y)
 x = intval(x, 0)[0]
