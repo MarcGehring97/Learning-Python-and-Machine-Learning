@@ -93,11 +93,6 @@ def intval(privinfos, epsinfo):
             except:
                 criterion[key] = 0
         criterion = {k: v for k, v in sorted(criterion.items(), key=lambda item: item[1])}
-        #print(certinfos)
-        #print(uncertinfos)
-        #print(freqdictwithout4)
-        #print(criterion)
-        #print(10 - x)
         i = 0
         j = 0
         while j < 10 - x:
@@ -121,8 +116,6 @@ def intval(privinfos, epsinfo):
                     j += 1
                     #4being the mean card value (unlikely case here)
             i += 1
-        #print(certinfos)
-        
         
     intval = 0
     for key in certinfos:
@@ -382,14 +375,6 @@ while True:
         break
     print("")
 
-#Compare theoretical return (purchase price / intrinsic value - 1) 
-#with borrowing rate of 10% to decide whether to buy on margin
-#Understand how borrowing works
-
-#What is the average criterion difference to the next-lower card value from
-#all correct prediction?
-#How many peeks on average until we have 10/10?
-
 "+ - + - + - + - + - + - + Performance Simulations + - + - + - + - + - + - +" 
 
 
@@ -462,13 +447,7 @@ def accuracyfinder():
 def randomdrawer(numpeeks):
     output =[] 
     x = list(np.random.choice(fulldeck, 10, False))
-    #print(x)
     for i in range(numpeeks):
         y = list(np.random.choice(x, 3, False))
         output.append(y)
     return output, sum(x)
-
-#x, y = randomdrawer(15)
-#print(x, y)
-#x = intval(x, 0)[0]
-#print(x)
