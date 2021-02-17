@@ -244,7 +244,7 @@ laststock = ""
 while True:    
     inp1 = ""
     while inp1 != "priv" and inp1 != "eps":
-        inp1 = raw_input("\nDo you want to add private or EPS information? priv/eps ")
+        inp1 = input("\nDo you want to add private or EPS information? priv/eps ")
           
     if inp1 == "priv":
         
@@ -255,7 +255,7 @@ while True:
                 if counter ==0:
                     comp = ""
                     while comp != "g" and comp != "q" and comp != "r" and comp != "b":
-                        comp = raw_input("\nWhat is the letter of the company? g/q/r/b ")
+                        comp = input("\nWhat is the letter of the company? g/q/r/b ")
                     if comp == "g":
                         i = 0
                     elif comp == "q":
@@ -266,7 +266,7 @@ while True:
                         i = 3   
                 if stocks[i].get_intval()[1] == 10:
                     break
-                inp = (raw_input("\nWhat are the new private information? ").split(", "))
+                inp = (input("\nWhat are the new private information? ").split(", "))
                 #Expected input: 12, 23, 13
                 inp = [ int(x) for x in inp ]
                 #Converting entries into integers
@@ -285,7 +285,7 @@ while True:
                 inp = ""
                 print("\n" + str(stocks[i].get_intval()[1]) + " certain cards!")
                 while inp != "y" and inp != "n":
-                    inp = raw_input("\nWould you like to add private information? y/n ")
+                    inp = input("\nWould you like to add private information? y/n ")
                 if inp == "n":
                     break
                 
@@ -305,7 +305,7 @@ while True:
             try:
                 comp = ""
                 while comp != "g" and comp != "q" and comp != "r" and comp != "b":
-                    comp = str(raw_input("\nWhat is the letter of the company? g/q/r/b "))
+                    comp = str(input("\nWhat is the letter of the company? g/q/r/b "))
                 if comp == "g":
                     i = 0
                 elif comp == "q":
@@ -314,7 +314,7 @@ while True:
                     i = 2
                 elif comp == "b":
                     i = 3
-                inp = int(raw_input("\nWhat is the new EPS information? "))
+                inp = int(input("\nWhat is the new EPS information? "))
                 if inp not in posepsvals:
                     raise ValueError
                 #Expected input: 12
@@ -338,14 +338,14 @@ while True:
     print("")
     print("For 75% accuracy, buy 19 peeks")
     print("For 80% accuracy, buy 23 peeks")
-    print("For 85% accuracy, buy 27 peeks")
+    print("For 85% accuracy, buy 27 peeks (recommended)")
     print("For 90% accuracy, buy 34 peeks (recommended)")
     print("For 95% accuracy, buy 48 peeks")
     print("")
     
     inp = ""
     while inp != "y" and inp != "n":
-        inp = raw_input("Would you like to remove your last input? y/n ")
+        inp = input("Would you like to remove your last input? y/n ")
     if  inp == "y":
         if lastinput == "priv" and permissioncheck == 0:
             laststock.del_lastprivinfo()
@@ -359,7 +359,7 @@ while True:
        
     inp = ""
     while inp != "y" and inp != "n":
-        inp = raw_input("\nWould you like to erase all your peek information? y/n ")
+        inp = input("\nWould you like to erase all your peek information? y/n ")
     if  inp == "y":
         laststock.del_allprivinfo()
         permissioncheck = 0
@@ -370,7 +370,7 @@ while True:
         
     inp = ""
     while inp != "y" and inp != "n":
-        inp = raw_input("\nWould you like to continue? y/n ")
+        inp = input("\nWould you like to continue? y/n ")
     if  inp == "n":
         break
     print("")
@@ -385,8 +385,6 @@ def modeltest(numpeeks, numtrials = 100000):
     for i in range(numtrials):
         x, y = randomdrawer(numpeeks)
         z = intval(x, 0)
-        #if z[0] == y:
-        #   output1 += 1
         if abs(z[0] - y) <= 0:
             output1 += 1
         output2 += z[1]
@@ -433,15 +431,45 @@ def accuracyfinder():
         if accuracy >= 0.95:
             output95.append(i)
             break
-        print("\nRound " + str(i + 1) + " completed! Accuracy is " + str(accuracy) + "\n")
+        print("\nPeek " + str(i + 1) + " completed! Accuracy is " + str(accuracy) + "\n")
     return output75[0], output80[0], output85[0], output90[0], output95[0]
 
-#Results (without averaging of corner cases):
+#Results:
 #For 75%, we need to draw 19
 #For 80%, we need to draw 23
 #For 85%, we need to draw 27
 #For 90%, we need to draw 34
 #For 95%, we need to draw 48
+    
+def certaintyfinder():
+    output7 = []
+    output8 = []
+    output9 = []
+    output925 = []
+    output95 = []
+    certainty = 0
+    for i in range(100):
+        certainty = modeltest(i)[1]
+        if certainty >= 7:
+            output7.append(i)
+        if certainty >= 8:
+            output8.append(i)
+        if certainty >= 9:
+            output9.append(i)
+        if certainty >= 9.25:
+            output925.append(i)
+        if certainty >= 9.5:
+            output95.append(i)
+            break
+        print("\nPeek " + str(i + 1) + " completed! Certainty is " + str(certainty) + "\n")
+    return output7[0], output8[0], output9[0], output925[0], output95[0]
+
+#Results:
+#For 7, we need to draw 5
+#For 8, we need to draw 7
+#For 9, we need to draw 13
+#For 9.25, we need to draw 18
+#For 9.5, we need to draw 28
 
 #Simulating the random behavior of the underlying samples
 def randomdrawer(numpeeks):
