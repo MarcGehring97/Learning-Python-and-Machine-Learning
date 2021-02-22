@@ -46,8 +46,6 @@ freqdictwithout4 = freqdict.copy()
 freqdict[4] = 10
 #Allowing the mean value to be added for estimation purposes
 
-
-
 #Intrinsic value calculation
 permissioncheck = 0
 def intval(privinfos, epsinfo):
@@ -376,7 +374,6 @@ while True:
     print("")
 
 "+ - + - + - + - + - + - + Performance Simulations + - + - + - + - + - + - +" 
-
 
 #Test for the intval function
 def modeltest(numpeeks, numtrials = 100000):
